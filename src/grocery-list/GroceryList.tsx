@@ -1,11 +1,11 @@
-import React, { FormEvent, useReducer } from 'react';
+import React, { FormEvent, useReducer, useState } from 'react';
 import GroceryItem from './GroceryItem';
 
 type TState = {
   items: TGroceryItem[];
 };
 
-type TGroceryItem = {
+export type TGroceryItem = {
   name: string;
   key: number;
 };
@@ -56,9 +56,17 @@ const reducer = (state: TState, action: TAction) => {
 
 const GroceryList = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [input, setInput] = useState('');
 
   const addItem = (e: FormEvent) => {
     e.preventDefault();
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: {
+        name: input,
+        key: Math.random() * 10,
+      },
+    });
   };
 
   return (
@@ -68,11 +76,13 @@ const GroceryList = () => {
       </header>
       <form onSubmit={addItem} className='input-form'>
         <label htmlFor='add-item'>Add Item</label>
-        <input value={listItem} id='add-item' autoFocus type='text' />
+        <input value={input} id='add-item' autoFocus type='text' />
         <button type='submit'>Add Item</button>
       </form>
       <section className='grocery-items'>
-        <GroceryItem item={listItem} />
+        {state.items.map((item) => {
+          return <GroceryItem key={item.key} item={item} />;
+        })}
       </section>
     </main>
   );
