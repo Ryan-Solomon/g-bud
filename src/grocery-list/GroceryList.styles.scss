@@ -1,0 +1,53 @@
+$text-shadow-black: 2px 2px 20px
+  rgba(
+    $color: #000000,
+    $alpha: 1,
+  );
+
+.grocery-container {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  justify-content: center;
+  align-content: center;
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-shadow: $text-shadow-black;
+  }
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    text-shadow: $text-shadow-black;
+  }
+
+  input {
+    padding: 0.4rem;
+    width: 20rem;
+    margin-bottom: 1.2rem;
+    box-shadow: $text-shadow-black;
+  }
+
+  button {
+    padding: 0.4rem;
+    background: none;
+    border: 1px solid whitesmoke;
+    color: white;
+    box-shadow: $text-shadow-black;
+
+    &:hover {
+      background: rgba(245, 245, 245, 0.638);
+      color: #333;
+      cursor: pointer;
+    }
+  }
+}

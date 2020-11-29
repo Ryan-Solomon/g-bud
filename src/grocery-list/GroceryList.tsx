@@ -1,5 +1,6 @@
 import React, { FormEvent, useReducer, useState } from 'react';
 import GroceryItem from './GroceryItem';
+import './GroceryList.styles.scss';
 
 type TState = {
   items: TGroceryItem[];
@@ -67,6 +68,7 @@ const GroceryList = () => {
         key: Math.random() * 10,
       },
     });
+    setInput('');
   };
 
   return (
@@ -76,7 +78,13 @@ const GroceryList = () => {
       </header>
       <form onSubmit={addItem} className='input-form'>
         <label htmlFor='add-item'>Add Item</label>
-        <input value={input} id='add-item' autoFocus type='text' />
+        <input
+          onChange={(e) => setInput(e.target.value)}
+          value={input}
+          id='add-item'
+          autoFocus
+          type='text'
+        />
         <button type='submit'>Add Item</button>
       </form>
       <section className='grocery-items'>

@@ -6,4 +6,15 @@
 
 body {
   font-size: 62.5%;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.755),
+      rgba(85, 14, 67, 0.748)
+    ),
+    url('./img/bg-dark.jpg');
+  background-size: cover;
+  color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
+import GroceryList from './grocery-list/GroceryList';
 
 function App() {
-  return <h1>Yo</h1>;
+  return <GroceryList />;
 }
 
 export default App;
