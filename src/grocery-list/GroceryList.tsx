@@ -1,55 +1,61 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useReducer } from 'react';
 import GroceryItem from './GroceryItem';
 
 type TState = {
-    items: TGroceryItem[]
-}
+  items: TGroceryItem[];
+};
 
 type TGroceryItem = {
-    name: string;
-    key: number;
-}
+  name: string;
+  key: number;
+};
 
 const initialState: TState = {
-    items: [],
-}
+  items: [],
+};
 
-
-
-type TAction = {
-    type: 'ADD_ITEM',
-    payload: TGroceryItem,
-} | {
-    type: 'REMOVE_ITEM',
-    payload: TGroceryItem
-} | {
-    type: 'CLEAR_ITEMS',
-} | {
-    type: 'EDIT_ITEM',
-    payload: TGroceryItem
-}
-
-
-
-const reducer = (state: TState , action: TAction){
-    switch (action.type) {
-        case 'ADD_ITEM':
-            return {}
-        case 'REMOVE_ITEM':
-            return {}
-        case 'CLEAR_ITEMS':
-            return {}
-        case 'EDIT_ITEM':
-            return {}
-        default:
-            throw new Error('wtf')
+type TAction =
+  | {
+      type: 'ADD_ITEM';
+      payload: TGroceryItem;
     }
-}
+  | {
+      type: 'REMOVE_ITEM';
+      payload: TGroceryItem;
+    }
+  | {
+      type: 'CLEAR_ITEMS';
+    }
+  | {
+      type: 'EDIT_ITEM';
+      payload: TGroceryItem;
+    };
 
-
+const reducer = (state: TState, action: TAction) => {
+  switch (action.type) {
+    case 'ADD_ITEM':
+      return {
+        items: [...state.items, action.payload],
+      };
+    case 'REMOVE_ITEM':
+      return {
+        items: [
+          ...state.items.filter((item) => item.key !== action.payload.key),
+        ],
+      };
+    case 'CLEAR_ITEMS':
+      return {
+        items: [],
+      };
+    case 'EDIT_ITEM':
+      return { ...state };
+    default:
+      throw new Error('wtf');
+  }
+};
 
 const GroceryList = () => {
-  const [listItem, setListItem] = useState('');
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const addItem = (e: FormEvent) => {
     e.preventDefault();
