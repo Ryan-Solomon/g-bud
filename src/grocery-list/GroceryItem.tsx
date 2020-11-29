@@ -2,17 +2,22 @@ import { readConfigFile } from 'typescript';
 
 import React, { FC } from 'react';
 import { TGroceryItem } from './GroceryList';
+import './GroceryItem.styles.scss';
 
 type Props = {
   item: TGroceryItem;
+  removeItem: (item: TGroceryItem) => void;
 };
 
-const GroceryItem: FC<Props> = ({ item: { name } }) => {
+const GroceryItem: FC<Props> = ({ item, removeItem }) => {
+  const { name } = item;
   return (
     <div className='grocery-item'>
       <h3>{name}</h3>
-      <button>Edit</button>
-      <button>Delete</button>
+      <div className='buttons'>
+        <button>Edit</button>
+        <button onClick={() => removeItem(item)}>Delete</button>
+      </div>
     </div>
   );
 };

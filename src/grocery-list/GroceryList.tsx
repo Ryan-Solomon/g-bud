@@ -71,6 +71,13 @@ const GroceryList = () => {
     setInput('');
   };
 
+  const removeItem = (item: TGroceryItem) => {
+    dispatch({
+      type: 'REMOVE_ITEM',
+      payload: item,
+    });
+  };
+
   return (
     <main className='grocery-container'>
       <header className='title'>
@@ -89,7 +96,9 @@ const GroceryList = () => {
       </form>
       <section className='grocery-items'>
         {state.items.map((item) => {
-          return <GroceryItem key={item.key} item={item} />;
+          return (
+            <GroceryItem removeItem={removeItem} key={item.key} item={item} />
+          );
         })}
       </section>
     </main>

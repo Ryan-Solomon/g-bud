@@ -1,0 +1,27 @@
+.grocery-item {
+  margin-top: 1.5rem;
+  display: flex;
+  //   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .buttons button {
+    margin: 0 1rem;
+    padding: 0.2rem;
+    font-size: 0.8rem;
+    background: none;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+
+    &:hover {
+      border-bottom: 1px solid red;
+      cursor: pointer;
+    }
+  }
+}
