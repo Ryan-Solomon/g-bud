@@ -43,6 +43,7 @@ $text-shadow-black: 2px 2px 20px
     border: 1px solid whitesmoke;
     color: white;
     box-shadow: $text-shadow-black;
+    margin: 0 0.5rem;
 
     &:hover {
       background: rgba(245, 245, 245, 0.638);

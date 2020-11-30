@@ -29,7 +29,7 @@ type TAction =
     }
   | {
       type: 'EDIT_ITEM';
-      payload: TGroceryItem;
+      payload: { newItem: TGroceryItem; prevKey: number };
     };
 
 const reducer = (state: TState, action: TAction) => {
@@ -49,7 +49,15 @@ const reducer = (state: TState, action: TAction) => {
         items: [],
       };
     case 'EDIT_ITEM':
-      return { ...state };
+      const newItems = state.items.map((item) => {
+        if (item.key === action.payload.prevKey) {
+          return action.payload.newItem;
+        } else {
+          return item;
+        }
+      });
+
+      return { ...state, items: newItems };
     default:
       throw new Error('wtf');
   }
@@ -78,6 +86,22 @@ const GroceryList = () => {
     });
   };
 
+  const clearItem = () => {
+    dispatch({
+      type: 'CLEAR_ITEMS',
+    });
+  };
+
+  const editItem = (item: TGroceryItem, prevKey: number) => {
+    dispatch({
+      type: 'EDIT_ITEM',
+      payload: {
+        newItem: item,
+        prevKey,
+      },
+    });
+  };
+
   return (
     <main className='grocery-container'>
       <header className='title'>
@@ -92,12 +116,23 @@ const GroceryList = () => {
           autoFocus
           type='text'
         />
-        <button type='submit'>Add Item</button>
+        <div className='button-container'>
+          <button type='submit'>Add Item</button>
+
+          <button onClick={clearItem} type='submit'>
+            Clear Items
+          </button>
+        </div>
       </form>
       <section className='grocery-items'>
         {state.items.map((item) => {
           return (
-            <GroceryItem removeItem={removeItem} key={item.key} item={item} />
+            <GroceryItem
+              editItem={editItem}
+              removeItem={removeItem}
+              key={item.key}
+              item={item}
+            />
           );
         })}
       </section>
