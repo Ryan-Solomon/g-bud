@@ -1,8 +1,9 @@
 import React from 'react';
+import './Nav.styles.scss';
 
 const Nav = () => {
   return (
-    <nav>
+    <nav className='nav'>
       <ul className='link-container'>
         <li>Home</li>
         <li>Grocery List</li>
