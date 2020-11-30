@@ -67,6 +67,26 @@ const GroceryList = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [input, setInput] = useState('');
 
+  React.useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('items') || '{}');
+    if (items) {
+      items.forEach((item: TGroceryItem) => {
+        dispatch({
+          type: 'ADD_ITEM',
+          payload: {
+            name: item.name,
+            key: item.key,
+          },
+        });
+      });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.removeItem('items');
+    localStorage.setItem('items', JSON.stringify(state.items));
+  }, [state.items]);
+
   const addItem = (e: FormEvent) => {
     e.preventDefault();
     dispatch({
