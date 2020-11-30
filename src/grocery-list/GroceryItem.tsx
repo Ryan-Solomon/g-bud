@@ -23,3 +23,7 @@ const GroceryItem: FC<Props> = ({ item, removeItem }) => {
 };
 
 export default GroceryItem;
+
+// Add Clear and Edit Item
+// Also, add routing to another page where you build a cart with context
+// By fetching products
