@@ -10,7 +10,7 @@ function App() {
       <Router>
         <Nav />
         <Switch>
-          <Route exact path='/groceries'>
+          <Route exact path='/grocery-list'>
             <GroceryPage />;
           </Route>
         </Switch>
