@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-type TProduct = {
+export type TProduct = {
   id: number;
   title: string;
   price: number;
@@ -11,7 +11,7 @@ type TProduct = {
 
 const initialState: TProduct[] = [];
 
-export const fetchProducts = () => {
+export const useFetchProducts = () => {
   const [products, setProducts] = useState<TProduct[]>();
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
 
@@ -33,7 +33,7 @@ export const fetchProducts = () => {
   return { products, status };
 };
 
-export const fetchProduct = (id: string) => {
+export const useFetchProduct = (id: string) => {
   const [product, setProduct] = useState<TProduct>();
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
 
