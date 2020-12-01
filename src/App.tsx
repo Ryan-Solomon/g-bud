@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Nav from './nav/Nav';
 import GroceryProductsPage from './pages/GroceryProductsPage';
 import ProductDetail from './grocery-products/ProductDetail';
+import CartPage from './pages/CartPage';
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
           <Route exact path='/grocery-products'>
             <GroceryProductsPage />
           </Route>
-          <Route exact path='/grocery-products'>
-            <GroceryProductsPage />
+          <Route exact path='/cart'>
+            <CartPage />
           </Route>
           <Route exact path='/product/:id'>
             <ProductDetail />
