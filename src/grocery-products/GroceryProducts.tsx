@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useFetchProducts } from './../custom-hooks/hooks';
 import Product from './Product';
+import './GroceryProducts.styles.scss';
 
 const GroceryProducts = () => {
   const { products, status } = useFetchProducts();
@@ -10,7 +11,7 @@ const GroceryProducts = () => {
     <Redirect to='/error' />;
   }
 
-  if (status === 'loading') return <h1>Loading...</h1>;
+  if (status === 'loading' || !products) return <h1>Loading...</h1>;
 
   return (
     <main className='products'>
@@ -18,7 +19,7 @@ const GroceryProducts = () => {
         <h1>Available Products</h1>
       </header>
       <section className='products-container'>
-        {products?.map((product) => {
+        {products.map((product) => {
           return <Product key={product.id} product={product} />;
         })}
       </section>
