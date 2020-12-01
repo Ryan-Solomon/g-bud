@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 import { TProduct } from '../custom-hooks/hooks';
 import './Product.styles.scss';
 
@@ -7,6 +8,11 @@ type Props = {
 };
 
 const Product: FC<Props> = ({ product }) => {
+  const history = useHistory();
+  const showDetailsPage = () => {
+    history.push(`/product/${product.id}`);
+  };
+
   return (
     <div className='container'>
       <div className='card'>
@@ -20,7 +26,9 @@ const Product: FC<Props> = ({ product }) => {
 
         <div className='buttons'>
           <button className='btn draw-border'>Add To Cart</button>
-          <button className='btn draw-border'>View Details</button>
+          <button onClick={showDetailsPage} className='btn draw-border'>
+            View Details
+          </button>
         </div>
       </div>
     </div>
