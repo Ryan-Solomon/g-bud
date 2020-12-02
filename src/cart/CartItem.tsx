@@ -16,6 +16,9 @@ const CartItem: FC<Props> = ({ item }) => {
           <h3>{item.category}</h3>
         </div>
       </div>
+      <div className='remove-item'>
+        <button>Remove Item</button>
+      </div>
     </div>
   );
 };
