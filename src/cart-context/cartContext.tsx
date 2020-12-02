@@ -15,8 +15,13 @@ const initialContext: TInitialContext = {
   clearCart: () => null,
 };
 
+type TCartState = TProduct[];
+const initialState: TCartState = [];
+
 const AppContext = React.createContext(initialContext);
 
 export const AppProvider: FC<ReactNode> = ({ children }) => {
+  const [cartItems, setCartItems] = React.useReducer(cartReducer, initialState);
+
   return <AppContext.Provider value={}></AppContext.Provider>;
 };
