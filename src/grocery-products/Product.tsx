@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { TProduct } from '../custom-hooks/hooks';
 import './Product.styles.scss';
@@ -10,6 +10,7 @@ type Props = {
 
 const Product: FC<Props> = ({ product }) => {
   const { addToCart } = useAppContext();
+  const [added, showAdded] = useState(false);
   const history = useHistory();
   const showDetailsPage = () => {
     history.push(`/product/${product.id}`);
@@ -17,7 +18,16 @@ const Product: FC<Props> = ({ product }) => {
 
   const handleAddToCart = () => {
     addToCart(product);
+    showAdded(true);
   };
+
+  React.useEffect(() => {
+    const id = setTimeout(() => {
+      showAdded(false);
+    }, 2000);
+
+    return () => clearTimeout(id);
+  }, [added]);
 
   return (
     <div className='container'>
@@ -32,7 +42,7 @@ const Product: FC<Props> = ({ product }) => {
 
         <div className='buttons'>
           <button onClick={handleAddToCart} className='btn draw-border'>
-            Add To Cart
+            {added ? 'Added!' : 'Add To Cart'}
           </button>
           <button onClick={showDetailsPage} className='btn draw-border'>
             View Details
