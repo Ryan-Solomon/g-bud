@@ -1,16 +1,22 @@
 import React, { FC } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { TProduct } from '../custom-hooks/hooks';
 import './Product.styles.scss';
+import { useAppContext } from './../cart-context/cartContext';
 
 type Props = {
   product: TProduct;
 };
 
 const Product: FC<Props> = ({ product }) => {
+  const { addToCart } = useAppContext();
   const history = useHistory();
   const showDetailsPage = () => {
     history.push(`/product/${product.id}`);
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product);
   };
 
   return (
@@ -25,7 +31,9 @@ const Product: FC<Props> = ({ product }) => {
         </div>
 
         <div className='buttons'>
-          <button className='btn draw-border'>Add To Cart</button>
+          <button onClick={handleAddToCart} className='btn draw-border'>
+            Add To Cart
+          </button>
           <button onClick={showDetailsPage} className='btn draw-border'>
             View Details
           </button>

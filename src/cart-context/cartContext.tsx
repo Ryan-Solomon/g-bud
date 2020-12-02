@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useContext } from 'react';
 import { TProduct } from '../custom-hooks/hooks';
 import {
   addToCartAction,
@@ -39,6 +39,8 @@ export const AppProvider: FC<ReactNode> = ({ children }) => {
     dispatch(clearCartAction());
   };
 
+  console.log(cartItems);
+
   return (
     <AppContext.Provider
       value={{
@@ -51,4 +53,8 @@ export const AppProvider: FC<ReactNode> = ({ children }) => {
       {children}
     </AppContext.Provider>
   );
+};
+
+export const useAppContext = () => {
+  return useContext(AppContext);
 };
