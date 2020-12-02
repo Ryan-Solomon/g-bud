@@ -1,5 +1,8 @@
-export const cartReducer = (state: TCartState, { type, payload }: TAction) => {
-  switch (type) {
+import { TAction } from './cartActions';
+import { TCartState } from './cartContext';
+
+export const cartReducer = (state: TCartState, action: TAction) => {
+  switch (action.type) {
     case 'ADD_TO_CART':
       return {
         ...state,

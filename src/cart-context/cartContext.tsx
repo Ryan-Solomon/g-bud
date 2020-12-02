@@ -1,5 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 import { TProduct } from '../custom-hooks/hooks';
+import {
+  addToCartAction,
+  clearCartAction,
+  removeFromCartAction,
+} from './cartActions';
+import { cartReducer } from './cartReducer';
 
 type TInitialContext = {
   cartItems: TProduct[];
@@ -15,13 +21,34 @@ const initialContext: TInitialContext = {
   clearCart: () => null,
 };
 
-type TCartState = TProduct[];
+export type TCartState = TProduct[];
 const initialState: TCartState = [];
 
 const AppContext = React.createContext(initialContext);
 
 export const AppProvider: FC<ReactNode> = ({ children }) => {
-  const [cartItems, setCartItems] = React.useReducer(cartReducer, initialState);
+  const [cartItems, dispatch] = React.useReducer(cartReducer, initialState);
 
-  return <AppContext.Provider value={}></AppContext.Provider>;
+  const addToCart = (product: TProduct) => {
+    dispatch(addToCartAction(product));
+  };
+  const removeFromCart = (product: TProduct) => {
+    dispatch(removeFromCartAction(product));
+  };
+  const clearCart = () => {
+    dispatch(clearCartAction());
+  };
+
+  return (
+    <AppContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        clearCart,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
