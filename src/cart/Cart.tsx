@@ -4,7 +4,7 @@ import { useAppContext } from './../cart-context/cartContext';
 import CartItem from './CartItem';
 
 const Cart = () => {
-  const { cartItems } = useAppContext();
+  const { cartItems, totalPrice } = useAppContext();
   console.log(cartItems);
 
   if (cartItems.length < 1)
@@ -16,6 +16,7 @@ const Cart = () => {
     <main className='cart-container'>
       <header>
         <h1>Your Cart</h1>
+        <h3>Amount: {totalPrice.toFixed(2)} </h3>
       </header>
       <section className='items-container'>
         {cartItems.map((item) => {

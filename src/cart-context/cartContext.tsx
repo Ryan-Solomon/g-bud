@@ -9,6 +9,7 @@ import { cartReducer } from './cartReducer';
 
 type TInitialContext = {
   cartItems: TProduct[];
+  totalPrice: number;
   addToCart: (product: TProduct) => void;
   removeFromCart: (product: TProduct) => void;
   clearCart: () => void;
@@ -16,6 +17,7 @@ type TInitialContext = {
 
 const initialContext: TInitialContext = {
   cartItems: [],
+  totalPrice: 0,
   addToCart: (p: TProduct) => null,
   removeFromCart: (p: TProduct) => null,
   clearCart: () => null,
@@ -28,6 +30,14 @@ const AppContext = React.createContext(initialContext);
 
 export const AppProvider: FC<ReactNode> = ({ children }) => {
   const [cartItems, dispatch] = React.useReducer(cartReducer, initialState);
+  const [totalPrice, setTotalPrice] = React.useState(0);
+
+  React.useEffect(() => {
+    const tp = cartItems.reduce((acc, curr) => {
+      return acc + curr.price;
+    }, 0);
+    setTotalPrice(tp);
+  }, [cartItems]);
 
   const addToCart = (product: TProduct) => {
     dispatch(addToCartAction(product));
@@ -45,6 +55,7 @@ export const AppProvider: FC<ReactNode> = ({ children }) => {
     <AppContext.Provider
       value={{
         cartItems,
+        totalPrice,
         addToCart,
         removeFromCart,
         clearCart,
