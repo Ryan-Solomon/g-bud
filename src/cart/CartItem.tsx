@@ -10,7 +10,12 @@ const CartItem: FC<Props> = ({ item }) => {
   return (
     <div className='cart-item'>
       <h1>{item.title}</h1>
-      <img src={item.image} alt={item.title} />
+      <div className='img' style={{ backgroundImage: `url(${item.image})` }}>
+        <div className='item-details'>
+          <h3>Price ${item.price}</h3>
+          <h3>{item.category}</h3>
+        </div>
+      </div>
     </div>
   );
 };

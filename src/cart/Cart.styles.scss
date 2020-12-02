@@ -1,0 +1,15 @@
+.cart-container {
+  height: 90vh;
+  width: 80vw;
+  margin: auto;
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+.items-container {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1 1 200px;
+}

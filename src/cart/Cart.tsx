@@ -13,8 +13,10 @@ const Cart = () => {
     );
 
   return (
-    <main>
-      <header>Your Cart</header>
+    <main className='cart-container'>
+      <header>
+        <h1>Your Cart</h1>
+      </header>
       <section className='items-container'>
         {cartItems.map((item) => {
           return <CartItem key={item.id} item={item} />;
