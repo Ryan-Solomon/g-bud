@@ -1,8 +1,11 @@
 import React from 'react';
 import './Nav.styles.scss';
 import { Link } from 'react-router-dom';
+import { useAppContext } from './../cart-context/cartContext';
 
 const Nav = () => {
+  const { cartItems } = useAppContext();
+
   return (
     <nav className='nav'>
       <ul className='link-container'>
@@ -16,7 +19,7 @@ const Nav = () => {
           <li>Grocery Products</li>
         </Link>
         <Link to='/cart'>
-          <li>Grocery Cart</li>
+          <li>Grocery Cart ({cartItems.length}) </li>
         </Link>
       </ul>
     </nav>
