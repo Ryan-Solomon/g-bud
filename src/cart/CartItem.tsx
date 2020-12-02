@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
 import { TProduct } from '../custom-hooks/hooks';
 import './CartItem.styles.scss';
+import { useAppContext } from './../cart-context/cartContext';
 
 type Props = {
   item: TProduct;
 };
 
 const CartItem: FC<Props> = ({ item }) => {
+  const { removeFromCart } = useAppContext();
   return (
     <div className='cart-item'>
       <h1>{item.title}</h1>
@@ -17,7 +19,7 @@ const CartItem: FC<Props> = ({ item }) => {
         </div>
       </div>
       <div className='remove-item'>
-        <button>Remove Item</button>
+        <button onClick={() => removeFromCart(item)}>Remove Item</button>
       </div>
     </div>
   );

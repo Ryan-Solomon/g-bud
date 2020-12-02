@@ -21,7 +21,7 @@ const ProductDetail = () => {
   return (
     <>
       <img src={product?.image} alt={product?.title} />
-      <h1>Loading mf'er...</h1>
+
       <p>{product?.description}</p>
     </>
   );
