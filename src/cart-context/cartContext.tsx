@@ -28,6 +28,8 @@ const initialState: TCartState = [];
 
 const AppContext = React.createContext(initialContext);
 
+// Add a function to get from local storage || just go with initialState
+
 export const AppProvider: FC<ReactNode> = ({ children }) => {
   const [cartItems, dispatch] = React.useReducer(cartReducer, initialState);
   const [totalPrice, setTotalPrice] = React.useState(0);
@@ -37,6 +39,11 @@ export const AppProvider: FC<ReactNode> = ({ children }) => {
       return acc + curr.price;
     }, 0);
     setTotalPrice(tp);
+  }, [cartItems]);
+
+  React.useEffect(() => {
+    localStorage.removeItem('cart-items');
+    localStorage.setItem('cart-items', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToCart = (product: TProduct) => {
